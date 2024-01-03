@@ -1,0 +1,106 @@
+File: ex4a1.c
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+ This if the "Filler" process. initializes an array with 100 cells.
+it loops a 100 times getting data through named-pipe from 3 other processes if 
+the number sent by the process is bigger/equal to the last number in the array it 
+inserts that number in the array and send the matching process 1. if the number is not 
+larger/equal it send 0. after 100 iterations, whether the array is full or not, 
+it prints the data we were asked to show (array size, min value, max value).
+then it sends -1 to the process indicating to finish and printing how many number each process has entered o the array.
+Compile: gcc ex4a1.c -Wall -o ex4a1
+
+Run: ex4a1 fifo0 fifo1 fifo2 fifo3
+
+
+File: ex4a2.c 
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+This is the "prime number creators" program. when they are ran 
+they create a pipe with the filler process.when all 3 creators are 
+up and running they receive a signal to start drawing random prime number and
+sending them to the Filler. if the number the process draws enters the array
+im the Filler it adds one to a counter. after the Filler is finished and sent the 
+signal to the process here to finish this process prints how much numbers it managed 
+to insert in the array.
+
+Compile: gcc ex4a2.c -Wall -o ex4a2
+
+Run: ex4a2 fifo0 1 
+(and respectively 2 for the second copy and 3 for the third copy)
+
+File: ex4b1.c
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+This if the "Filler" process. initializes an array with 100 cells.
+it loops a 100 times getting data through message queue from 3 other processes
+if the number sent by the process is bigger/equal to the last number in the array
+it inserts that number in the array and send the matching process 1. if the number
+is not larger/equal it send 0.after 100 iterations, whether the array is full or
+not, it prints the data we were asked to show (array size, min value, max value).
+then it sends -1 to the process indicating to finish and printing
+how many number each process has entered o the array.
+Compile: gcc ex4b1.c -Wall -o ex4b1
+
+Run: ex4b1
+
+File: ex4b2.c 
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+This is the "prime number creators" program.
+when they are ran they jump onto the queue the filler created. 
+when all 3 creators are up and running they receive a signal to start drawing random
+prime number and sending them to the Filler. if the number the process draws enters 
+the array im the Filler it adds one to a counter. after the Filler is finished and 
+sent the signal to the process here to finish this process prints how much numbers 
+it managed to insert in the array.
+Compile: gcc ex4b2.c -Wall -o ex4b2
+
+Run: ex4b2 1
+(and respectively 2 for the second copy and 3 for the third copy)
+
+File: ex4c1.c
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+This program is our server that checks for prime numbers.
+it receives a string of number through the message queue.
+it goes over all the number in the strings and checks for prime numbers it 
+adds all the prime number to a new string and sends it back to the client
+
+Compile: gcc ex4c1.c -Wall -o ex4c1
+
+Run: ex4c1 
+
+File: ex4c2.c 
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+This program is our server that checks for palindromes numbers.
+it receives a string from the client through the message queue.
+it checks if the string is a palindrome it sends '+' back through the queue.
+if it's not a palindrome it sends '-' back
+
+Compile: gcc ex4c2.c -Wall -o ex4c2
+
+Run: ex4c2
+
+File: ex4c3.c 
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+this is the front end side of our program.
+it prompts the user to enter a command 'q' or 'p'.
+'p': it waits for the user to enter a series of numbers that end with a 0.
+it sends those number through the message queue to the server that checks for prime
+numbers and after it gets the response it prints it to the screen.
+'q': it waits for the user to enter a string. it sends the string to the server that 
+checks for palindromes and then rints the answer it got from the server to console.
+
+Compile: gcc ex4c3.c -Wall -o ex4c3
+
+Run: ex4c3
